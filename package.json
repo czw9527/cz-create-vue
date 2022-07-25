@@ -1,0 +1,23 @@
+{
+  "name": "cz-create-vue",
+  "version": "1.0.2",
+  "description": "VUE file creation template",
+  "type": "module",
+  "main": "bin/index.js",
+  "bin": {
+    "ct": "./bin/index.js"
+  },
+  "keywords": [
+    "vue",
+    "create"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/czw9527/cz-create-vue.git"
+  },
+  "author": "czw",
+  "license": "ISC",
+  "devDependencies": {
+    "inquirer": "^9.0.2"
+  }
+}
