@@ -1,9 +1,12 @@
 {
   "name": "cz-create-vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "VUE file creation template",
   "type": "module",
   "main": "bin/index.js",
+  "scripts": {
+    "ct": "node ./bin/index.js"
+  },
   "bin": {
     "ct": "./bin/index.js"
   },

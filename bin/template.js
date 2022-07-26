@@ -91,11 +91,24 @@ function directive3Page({
 export default ${filename};`
 }
 
+// directive文件模板
+function pluginPage({
+  filename,
+}) {
+  return `const ${filename} = {
+    install: (Vue, options) => {
+
+    }
+}
+export default ${filename};`
+}
+
 export {
   indexPage,
   vuePage,
   vue3Page,
   stylePage,
   directivePage,
-  directive3Page
+  directive3Page,
+  pluginPage
 }

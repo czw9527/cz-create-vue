@@ -14,6 +14,7 @@ import {
     vue3Page,
     directivePage,
     directive3Page,
+    pluginPage
 }
 from './template.js'
 const {
@@ -35,7 +36,7 @@ const {
             type: 'list',
             name: 'choice',
             message: 'what do you want to do',
-            choices: ['create component', 'create view', 'create directive'],
+            choices: ['create component', 'create view', 'create directive', 'create plugin'],
         },
         /* Pass your questions in here */
         {
@@ -44,7 +45,7 @@ const {
             message: 'what do you want to use',
             choices: ['scss', 'less'],
             when: function (answer) {
-                return answer.choice !== 'create directive'
+                return ['create component', 'create view'].includes(answer.choice)
             }
         },
         {
@@ -104,6 +105,14 @@ switch (choice) {
             suffix: version === 'vue2.x' ? 'js' : 'ts'
         }, ]
         mkdirsSync('./src/directives')
+        break;
+    case 'create plugin':
+        dirname = `./src/plugins`
+        templateFns = [{
+            fn: pluginPage,
+            suffix: version === 'vue2.x' ? 'js' : 'ts'
+        }, ]
+        mkdirsSync('./src/plugins')
         break;
     default:
         break;
