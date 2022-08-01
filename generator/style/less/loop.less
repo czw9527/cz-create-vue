@@ -1,0 +1,44 @@
+.maxWidth (@a) {
+  .max-width-@{a} {
+    display: block;
+    max-width: @a * 1vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.mg (@a) {
+  .mar-top-@{a} {
+    margin-top: @a * 1px;
+  }
+  .mar-bottom-@{a} {
+    margin-bottom: @a * 1px;
+  }
+  .mar-left-@{a} {
+    margin-left: @a * 1px;
+  }
+  .mar-right-@{a} {
+    margin-right: @a * 1px;
+  }
+}
+.pd (@a) {
+  .pad-top-@{a} {
+    padding-top: @a * 1px;
+  }
+  .pad-bottom-@{a} {
+    padding-bottom: @a * 1px;
+  }
+  .pad-left-@{a} {
+    padding-left: @a * 1px;
+  }
+  .pad-right-@{a} {
+    padding-right: @a * 1px;
+  }
+}
+.loop(@i) when (@i <= 100) {
+  .maxWidth(@i);
+  .mg(@i);
+  .pd(@i);
+  .loop(@i + 1);
+}
+.loop(1);

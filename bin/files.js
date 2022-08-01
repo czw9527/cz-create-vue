@@ -6,7 +6,9 @@ function mkdirsSync(dirname) {
   if (fs.existsSync(dirname)) {
     return console.log(dirname + '已存在')
   } else {
-    fs.mkdir(dirname, () => {})
+    fs.mkdir(dirname, () => {
+      console.log(dirname + '创建成功')
+    })
   }
 }
 
@@ -52,7 +54,36 @@ function wteFileSync(filePath, templateFn, option) {
   }
 }
 
+
+function copyFile(dirList, fileName) {
+  let paths = fs.readdirSync(dirList);
+  const writable = fs.createWriteStream(fileName); //创建写入流
+  paths.forEach(function (path) {
+    const _src = dirList + '/' + path;
+    fs.stat(_src, function (err, stats) { //stats  该对象 包含文件属性
+      if (err) throw err;
+      if (stats.isFile()) { //如果是个文件则拷贝 
+        fs.createReadStream(_src).pipe(writable); //创建读取流
+      } else if (stats.isDirectory()) { //是目录则 递归 
+        checkDirectory(_src, fileName, copy);
+      }
+    });
+  });
+}
+
+function checkDirectory(src, dst, callback) {
+  fs.access(dst, fs.constants.F_OK, (err) => {
+    if (err) {
+      fs.mkdirSync(dst);
+      callback(src, dst);
+    } else {
+      callback(src, dst);
+    }
+  });
+}
+
 export {
   mkdirsSync,
   mkdirsAndFileSync,
+  copyFile
 }
