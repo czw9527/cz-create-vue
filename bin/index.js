@@ -21,7 +21,7 @@ import {
 const {
     version,
     choice,
-    name,
+    name = 'index',
     cssType,
     globalFile
 } = await inquirer
@@ -47,7 +47,7 @@ const {
                 return answer.choice === 'cope global file'
             },
             message: 'what do you want to copy',
-            choices: ['styles', 'utils'],
+            choices: ['styles', 'utils', 'plugins'],
         },
         /* Pass your questions in here */
         {
@@ -64,7 +64,7 @@ const {
             name: 'name',
             message: 'please input dirname eg:`views/default`',
             when: function (answer) {
-                return ['create component', 'create view'].includes(answer.choice)
+                return ['create component', 'create view', 'create directive', 'create plugin'].includes(answer.choice)
             },
             // default: 'views/default',
             /* Legacy way: with this.async */
@@ -147,6 +147,7 @@ switch (choice) {
 function createGlobalFile(type, option) {
     let fileName;
     let copyList;
+    const suffix = option.version === 'vue2.x' ? 'js' : 'ts'
     switch (type) {
         case 'styles':
             mkdirsSync('./src/assets')
@@ -156,9 +157,13 @@ function createGlobalFile(type, option) {
             break;
         case 'utils':
             mkdirsSync(`./src/utils`)
-            const suffix = option.version === 'vue2.x' ? 'js' : 'ts'
-            fileName = `./src/utils/index.${suffix}`
+            fileName = `./src/utils`
             copyList = `./generator/utils/${suffix}`
+            break;
+        case 'plugins':
+            mkdirsSync(`./src/plugins`)
+            fileName = `./src/plugins`
+            copyList = `./generator/plugins/${suffix}`
             break;
         default:
             break;

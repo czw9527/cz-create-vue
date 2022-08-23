@@ -57,9 +57,10 @@ function wteFileSync(filePath, templateFn, option) {
 
 function copyFile(dirList, fileName) {
   let paths = fs.readdirSync(dirList);
-  const writable = fs.createWriteStream(fileName); //创建写入流
+  // const writable = fs.createWriteStream(fileName); //创建写入流
   paths.forEach(function (path) {
     const _src = dirList + '/' + path;
+    const writable = fs.createWriteStream(`${fileName}/${path}`); //创建写入流
     fs.stat(_src, function (err, stats) { //stats  该对象 包含文件属性
       if (err) throw err;
       if (stats.isFile()) { //如果是个文件则拷贝 
